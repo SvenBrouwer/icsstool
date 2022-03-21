@@ -1,0 +1,8 @@
+package nl.han.ica.datastructures;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println();
+    }
+}
