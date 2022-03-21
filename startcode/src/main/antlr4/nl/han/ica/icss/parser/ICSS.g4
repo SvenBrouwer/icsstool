@@ -34,40 +34,42 @@ MUL: '*';
 ASSIGNMENT_OPERATOR: ':=';
 
 //--- PARSER: ---
-stylesheet: (((idtag | classtag) | LOWER_IDENT) meth | var)+;
+stylesheet: (((idselector | classselector) | tagselector) stylerule | var)+;
 
-meth:  OPEN_BRACE (var | ifstmt)+ CLOSE_BRACE;
+stylerule:  OPEN_BRACE (var | ifclause)+ CLOSE_BRACE;
 
-ifstmt: IF BOX_BRACKET_OPEN CAPITAL_IDENT BOX_BRACKET_CLOSE OPEN_BRACE (var | ifstmt | elsestmt)+ CLOSE_BRACE;
+ifclause: IF BOX_BRACKET_OPEN variablereference BOX_BRACKET_CLOSE OPEN_BRACE (var | ifclause | elseclause)+ CLOSE_BRACE;
 
-elsestmt: ELSE OPEN_BRACE (var | ifstmt)+ CLOSE_BRACE;
+elseclause: ELSE OPEN_BRACE (var | ifclause)+ CLOSE_BRACE;
 
-var: (decl | upper) (COLON | ASSIGNMENT_OPERATOR) (pixel | color|
-t | f | decl | upper | mul | plus | minus | scalar)+ SEMICOLON;
+var: (tagselector | variablereference) (COLON | variableassignment) (pixelliteral | colorliteral|
+t | f | tagselector | variablereference | multiplyoperation | addoperation | substractoperation | scalarliteral)+ SEMICOLON;
 
-upper: CAPITAL_IDENT;
+variablereference: CAPITAL_IDENT;
 
-decl: LOWER_IDENT;
+tagselector: LOWER_IDENT;
 
-mul: MUL;
+multiplyoperation: MUL;
 
-plus: PLUS;
+addoperation: PLUS;
 
-minus: MIN;
+substractoperation: MIN;
 
-idtag: ID_IDENT;
+idselector: ID_IDENT;
 
-classtag: CLASS_IDENT;
+classselector: CLASS_IDENT;
 
-scalar: SCALAR;
+scalarliteral: SCALAR;
 
-pixel: PIXELSIZE;
+pixelliteral: PIXELSIZE;
 
-color: COLOR;
+colorliteral: COLOR;
 
 t: TRUE;
 
 f: FALSE;
+
+variableassignment: ASSIGNMENT_OPERATOR;
 
 
 

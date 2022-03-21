@@ -47,16 +47,16 @@ public class ASTListener extends ICSSBaseListener {
 		ast.root = (Stylesheet) stack.pop();
 	}
 
-	@Override public void enterMeth(ICSSParser.MethContext ctx) {
-		Stylerule stylerule = new Stylerule();
-		stack.push(stylerule);
-
-	}
-
-	@Override public void exitMeth(ICSSParser.MethContext ctx) {
-		Stylerule stylerule = (Stylerule) stack.pop();
-		stack.peek().addChild(stylerule);
-	}
+//	@Override public void enterMeth(ICSSParser.MethContext ctx) {
+//		Stylerule stylerule = new Stylerule();
+//		stack.push(stylerule);
+//
+//	}
+//
+//	@Override public void exitMeth(ICSSParser.MethContext ctx) {
+//		Stylerule stylerule = (Stylerule) stack.pop();
+//		stack.peek().addChild(stylerule);
+//	}
 
 	@Override public void enterVar(ICSSParser.VarContext ctx) {
 		Declaration declaration = new Declaration();
@@ -68,55 +68,13 @@ public class ASTListener extends ICSSBaseListener {
 		stack.peek().addChild(declaration);
 	}
 
-	@Override public void enterDecl(ICSSParser.DeclContext ctx) {
-		TagSelector tagSelector = new TagSelector();
-		stack.push(tagSelector);
+//	@Override public void enterDecl(ICSSParser.DeclContext ctx) {
+//		//TagSelector tagSelector = new TagSelector();
+//		//stack.push(tagSelector);
+//
+//	}
 
-	}
 
-	@Override public void exitDecl(ICSSParser.DeclContext ctx) { }
-
-	@Override public void enterIfstmt(ICSSParser.IfstmtContext ctx) { }
-
-	@Override public void exitIfstmt(ICSSParser.IfstmtContext ctx) { }
-
-	@Override public void enterElsestmt(ICSSParser.ElsestmtContext ctx) { }
-
-	@Override public void enterUpper(ICSSParser.UpperContext ctx) { }
-
-	@Override public void exitUpper(ICSSParser.UpperContext ctx) { }
-
-	@Override public void enterMul(ICSSParser.MulContext ctx) { }
-
-	@Override public void exitMul(ICSSParser.MulContext ctx) { }
-
-	@Override public void enterPlus(ICSSParser.PlusContext ctx) { }
-
-	@Override public void exitPlus(ICSSParser.PlusContext ctx) { }
-
-	@Override public void enterMinus(ICSSParser.MinusContext ctx) { }
-
-	@Override public void exitMinus(ICSSParser.MinusContext ctx) { }
-
-	@Override public void enterIdtag(ICSSParser.IdtagContext ctx) { }
-
-	@Override public void exitIdtag(ICSSParser.IdtagContext ctx) { }
-
-	@Override public void enterClasstag(ICSSParser.ClasstagContext ctx) { }
-
-	@Override public void exitClasstag(ICSSParser.ClasstagContext ctx) { }
-
-	@Override public void enterScalar(ICSSParser.ScalarContext ctx) { }
-
-	@Override public void exitScalar(ICSSParser.ScalarContext ctx) { }
-
-	@Override public void enterPixel(ICSSParser.PixelContext ctx) { }
-
-	@Override public void exitPixel(ICSSParser.PixelContext ctx) { }
-
-	@Override public void enterColor(ICSSParser.ColorContext ctx) { }
-
-	@Override public void exitColor(ICSSParser.ColorContext ctx) { }
 
 	@Override public void enterT(ICSSParser.TContext ctx) { }
 
