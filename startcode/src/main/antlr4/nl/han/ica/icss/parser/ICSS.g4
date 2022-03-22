@@ -34,20 +34,24 @@ MUL: '*';
 ASSIGNMENT_OPERATOR: ':=';
 
 //--- PARSER: ---
-stylesheet: (((idselector | classselector) | tagselector) stylerule | var)+;
+stylesheet: (variableassignment | stylerule)+;
 
-stylerule:  OPEN_BRACE (var | ifclause)+ CLOSE_BRACE;
+stylerule:  ((idselector | classselector) | tagselector) OPEN_BRACE (declaration | ifclause)+ CLOSE_BRACE;
 
-ifclause: IF BOX_BRACKET_OPEN variablereference BOX_BRACKET_CLOSE OPEN_BRACE (var | ifclause | elseclause)+ CLOSE_BRACE;
+ifclause: IF BOX_BRACKET_OPEN variablereference BOX_BRACKET_CLOSE OPEN_BRACE (declaration | ifclause | elseclause)+ CLOSE_BRACE;
 
-elseclause: ELSE OPEN_BRACE (var | ifclause)+ CLOSE_BRACE;
+elseclause: ELSE OPEN_BRACE (declaration | ifclause)+ CLOSE_BRACE;
 
-var: (tagselector | variablereference) (COLON | variableassignment) (pixelliteral | colorliteral|
+declaration: LOWER_IDENT COLON (pixelliteral | colorliteral|
 t | f | tagselector | variablereference | multiplyoperation | addoperation | substractoperation | scalarliteral)+ SEMICOLON;
+
+variableassignment: variablereference ASSIGNMENT_OPERATOR (colorliteral | pixelliteral | t | f) SEMICOLON;
 
 variablereference: CAPITAL_IDENT;
 
 tagselector: LOWER_IDENT;
+
+
 
 multiplyoperation: MUL;
 
@@ -69,7 +73,8 @@ t: TRUE;
 
 f: FALSE;
 
-variableassignment: ASSIGNMENT_OPERATOR;
+
+
 
 
 
