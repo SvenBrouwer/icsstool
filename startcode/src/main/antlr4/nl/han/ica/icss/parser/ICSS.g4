@@ -36,28 +36,28 @@ ASSIGNMENT_OPERATOR: ':=';
 //--- PARSER: ---
 stylesheet: (variableassignment | stylerule)+;
 
-stylerule:  ((idselector | classselector) | tagselector) OPEN_BRACE (declaration | ifclause)+ CLOSE_BRACE;
+stylerule:  ((idselector | classselector) | tagselector) OPEN_BRACE (declaration | ifclause | variableassignment)+ CLOSE_BRACE;
 
-ifclause: IF BOX_BRACKET_OPEN variablereference BOX_BRACKET_CLOSE OPEN_BRACE (declaration | ifclause | elseclause)+ CLOSE_BRACE;
+ifclause: IF BOX_BRACKET_OPEN variablereference BOX_BRACKET_CLOSE OPEN_BRACE (declaration | ifclause | elseclause | variableassignment)+ CLOSE_BRACE;
 
-elseclause: ELSE OPEN_BRACE (declaration | ifclause)+ CLOSE_BRACE;
+elseclause: ELSE OPEN_BRACE (declaration | ifclause | variableassignment)+ CLOSE_BRACE;
 
-declaration: LOWER_IDENT COLON (pixelliteral | colorliteral|
-t | f | tagselector | variablereference | multiplyoperation | addoperation | substractoperation | scalarliteral)+ SEMICOLON;
+declaration: LOWER_IDENT COLON (t | f | tagselector |
+variablereference | operation) SEMICOLON;
 
-variableassignment: variablereference ASSIGNMENT_OPERATOR (colorliteral | pixelliteral | t | f) SEMICOLON;
+variableassignment: variablereference ASSIGNMENT_OPERATOR ((t | f) | operation) SEMICOLON;
 
 variablereference: CAPITAL_IDENT;
 
+operation: (colorliteral | scalarliteral | pixelliteral | variablereference) | operation multiplyoperation operation | operation (addoperation | subtractoperation) operation;
+
 tagselector: LOWER_IDENT;
-
-
 
 multiplyoperation: MUL;
 
 addoperation: PLUS;
 
-substractoperation: MIN;
+subtractoperation: MIN;
 
 idselector: ID_IDENT;
 
@@ -72,6 +72,7 @@ colorliteral: COLOR;
 t: TRUE;
 
 f: FALSE;
+
 
 
 
